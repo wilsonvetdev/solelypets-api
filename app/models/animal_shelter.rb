@@ -1,0 +1,2 @@
+class AnimalShelter < ApplicationRecord
+end

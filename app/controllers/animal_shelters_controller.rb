@@ -1,0 +1,2 @@
+class AnimalSheltersController < ApplicationController
+end
