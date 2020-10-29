@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_185842) do
   create_table "animal_shelters", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.string "email"
     t.string "name"
     t.string "address"
     t.string "city"

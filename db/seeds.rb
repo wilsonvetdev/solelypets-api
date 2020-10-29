@@ -14,6 +14,7 @@ AnimalShelter.reset_pk_sequence
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         name: Faker::TvShows::SouthPark.character + ' Animal Shelter',
+        email: Faker::Internet.email,
         address: Faker::Address.street_address,
         city: Faker::Address.city,
         state: Faker::Address.state,
