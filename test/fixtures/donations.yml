@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 1.5
+  card_type: MyString
+  card_number: MyString
+  security_code: MyString
+  zipcode: MyString
+  animal_shelter: one
+  user: one
+
+two:
+  amount: 1.5
+  card_type: MyString
+  card_number: MyString
+  security_code: MyString
+  zipcode: MyString
+  animal_shelter: two
+  user: two
