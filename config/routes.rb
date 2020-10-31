@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   get '/animal_shelters', to: 'animal_shelters#index'
 
+  post '/login', to: 'users#login'
+
 end
