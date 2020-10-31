@@ -8,6 +8,8 @@
 
 AnimalShelter.destroy_all
 AnimalShelter.reset_pk_sequence
+User.destroy_all
+User.reset_pk_sequence
 
 6.times do |i|
     AnimalShelter.create!(
@@ -21,5 +23,7 @@ AnimalShelter.reset_pk_sequence
         password_digest: nil
     )
 end
+
+wilson = User.create!(first_name: 'wilson', last_name: 'ng', email:'wilson@email.com', password:'abc123')
 
 puts "seeded 🐥🐥🐥"
