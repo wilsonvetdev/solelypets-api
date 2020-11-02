@@ -1,4 +1,9 @@
+require 'stripe'
+require 'dotenv'
+Dotenv.load  
+
 class UsersController < ApplicationController
+
 
     before_action :authorized, only: [:keep_logged_in]
 
@@ -18,6 +23,13 @@ class UsersController < ApplicationController
     def create 
         user = User.create(user_params)
         if user.valid?
+            Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+            customer = Stripe::Customer.create({
+                email: params[:email],
+                name: "#{params[:last_name]}, #{params[:first_name]}",
+                description: 'My First Test Customer (created for API docs)',
+            })
+            byebug
             wristband_token = encode_token({user_id: user.id})
             render json: {
                 user: UserSerializer.new(user), 
@@ -38,6 +50,14 @@ class UsersController < ApplicationController
         }
     end
 
+    def my_donations
+        Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+        customers = Stripe::Customer.list
+        customers = customers.data
+        customers = customers.find_all { |customer| customer.email === 'wilson@email.com' }
+        render json: {donation_count: customers.count}
+    end
+
     private
 
     def user_params
@@ -45,3 +65,31 @@ class UsersController < ApplicationController
     end
 
 end
+
+# <Stripe::Customer:0x3fea1f0cba18 id=cus_IJhHj5C1zwhA0r> JSON: {
+#     "id": "cus_IJhHj5C1zwhA0r",
+#     "object": "customer",
+#     "address": null,
+#     "balance": 0,
+#     "created": 1604326762,
+#     "currency": null,
+#     "default_source": null,
+#     "delinquent": false,
+#     "description": "My First Test Customer (created for API docs)",
+#     "discount": null,
+#     "email": "sponge@email.com",
+#     "invoice_prefix": "C5FB64B0",
+#     "invoice_settings": {"custom_fields":null,"default_payment_method":null,"footer":null},
+#     "livemode": false,
+#     "metadata": {},
+#     "name": "squarepants, spongebob",
+#     "next_invoice_sequence": 1,
+#     "phone": null,
+#     "preferred_locales": [
+
+#     ],
+#     "shipping": null,
+#     "tax_exempt": "none"
+#   }
+#   (byebug) customer.id
+#   "cus_IJhHj5C1zwhA0r"
