@@ -29,6 +29,7 @@ class UsersController < ApplicationController
                 name: "#{params[:last_name]}, #{params[:first_name]}",
                 description: 'My First Test Customer (created for API docs)',
             })
+            User.update(customer_id: customer.id)
             byebug
             wristband_token = encode_token({user_id: user.id})
             render json: {
