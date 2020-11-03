@@ -15,7 +15,7 @@ User.reset_pk_sequence
     AnimalShelter.create!(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
-        name: Faker::TvShows::SouthPark.character + ' Animal Shelter',
+        name: Faker::TvShows::SouthPark.unique.character + ' Animal Shelter',
         email: Faker::Internet.email,
         address: Faker::Address.street_address,
         city: Faker::Address.city,
@@ -24,6 +24,5 @@ User.reset_pk_sequence
     )
 end
 
-wilson = User.create!(first_name: 'wilson', last_name: 'ng', email:'wilson@email.com', password:'abc123')
-
 puts "seeded 🐥🐥🐥"
+

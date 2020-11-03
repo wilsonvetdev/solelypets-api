@@ -25,8 +25,7 @@ class UsersController < ApplicationController
             Stripe.api_key = ENV['STRIPE_SECRET_KEY']
             customer = Stripe::Customer.create({
                 email: params[:email],
-                name: "#{params[:last_name]}, #{params[:first_name]}",
-                description: 'My First Test Customer (created for API docs)',
+                name: "#{params[:last_name]}, #{params[:first_name]}"
             })
             user.update(customer_id: customer.id)
             wristband_token = encode_token({user_id: user.id})
