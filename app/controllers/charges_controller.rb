@@ -13,7 +13,8 @@ class ChargesController < ApplicationController
         #-it seems a little too early because what if the user cancels the session?
         #feature to have animals being shown on the page - crud for animal shelter
         session = Stripe::Checkout::Session.create({
-            # customer: @user.email, **need to create customer on Stripe API
+            customer: @user.customer_id,
+            client_reference_id: params[:animal_shelter_id],
             payment_method_types: ['card'],
             line_items: [{
                 price_data: {
@@ -21,7 +22,6 @@ class ChargesController < ApplicationController
                     product_data: {
                     name: 'Donation to animal shelter',
                 },
-                # animal_shelter: params[:animal_shelter_id],
                 unit_amount: 500,
                 },
                 quantity: 1,

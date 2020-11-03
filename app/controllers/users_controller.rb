@@ -4,7 +4,6 @@ Dotenv.load
 
 class UsersController < ApplicationController
 
-
     before_action :authorized, only: [:keep_logged_in]
 
     def login
@@ -29,8 +28,7 @@ class UsersController < ApplicationController
                 name: "#{params[:last_name]}, #{params[:first_name]}",
                 description: 'My First Test Customer (created for API docs)',
             })
-            User.update(customer_id: customer.id)
-            byebug
+            user.update(customer_id: customer.id)
             wristband_token = encode_token({user_id: user.id})
             render json: {
                 user: UserSerializer.new(user), 
@@ -44,19 +42,11 @@ class UsersController < ApplicationController
     def keep_logged_in
         # @user exists here because of the before_action
         wristband_token = encode_token({user_id: @user.id})
-
+        
         render json: {
             user: UserSerializer.new(@user), 
             token: wristband_token
         }
-    end
-
-    def my_donations
-        Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-        customers = Stripe::Customer.list
-        customers = customers.data
-        customers = customers.find_all { |customer| customer.email === 'wilson@email.com' }
-        render json: {donation_count: customers.count}
     end
 
     private
@@ -67,6 +57,7 @@ class UsersController < ApplicationController
 
 end
 
+# Customer Object returned by Stripe API 
 # <Stripe::Customer:0x3fea1f0cba18 id=cus_IJhHj5C1zwhA0r> JSON: {
 #     "id": "cus_IJhHj5C1zwhA0r",
 #     "object": "customer",
