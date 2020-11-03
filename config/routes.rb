@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   get '/animal_shelters', to: 'animal_shelters#index'
   
-  post '/login', to: 'users#login'
+  post '/user_login', to: 'users#login'
+  post '/shelter_login', to: 'animal_shelters#login'
   post '/register', to: 'users#create'
   get '/keep_logged_in', to: 'users#keep_logged_in'
   post '/create-checkout-session', to: 'charges#create'

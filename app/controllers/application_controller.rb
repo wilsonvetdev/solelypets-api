@@ -1,8 +1,15 @@
+require 'dotenv'
+Dotenv.load  
+
 class ApplicationController < ActionController::API
 
     def encode_token(payload)
         # store secret in env variable
-        JWT.encode(payload, 'my_s3cr3t')
+        JWT.encode(payload, secret)
+    end
+
+    def secret 
+        ENV['JWT_SECRET']
     end
 
     def auth_header
@@ -17,9 +24,9 @@ class ApplicationController < ActionController::API
 
             # If the token is invalid, return nil instead of erroring out
             begin
-            JWT.decode(token, 'my_s3cr3t', true, algorithm: 'HS256')
+                JWT.decode(token, secret, true, algorithm: 'HS256')
             rescue JWT::DecodeError
-            nil
+                nil
             end
         end
     end
@@ -33,6 +40,14 @@ class ApplicationController < ActionController::API
 
     def logged_in?
         !!logged_in_user
+    end
+
+    def check_user
+        if decoded_token
+            class_name = decoded_token[0]['role']
+            byebug
+            @user = User.find_by(id: user_id)
+        end
     end
 
     def authorized

@@ -22,13 +22,7 @@ class UsersController < ApplicationController
     def create 
         user = User.create(user_params)
         if user.valid?
-            Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-            customer = Stripe::Customer.create({
-                email: params[:email],
-                name: "#{params[:last_name]}, #{params[:first_name]}"
-            })
-            user.update(customer_id: customer.id)
-            wristband_token = encode_token({user_id: user.id})
+            wristband_token = encode_token({user_id: user.id, role: user.class.name})
             render json: {
                 user: UserSerializer.new(user), 
                 token: wristband_token
@@ -40,7 +34,7 @@ class UsersController < ApplicationController
 
     def keep_logged_in
         # @user exists here because of the before_action
-        wristband_token = encode_token({user_id: @user.id})
+        wristband_token = encode_token({user_id: @user.id, role: user.class.name})
         
         render json: {
             user: UserSerializer.new(@user), 
