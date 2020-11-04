@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     def login
         user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
-            wristband_token = encode_token({user_id: user.id})
+            wristband_token = encode_token({user_id: user.id, role: user.class.name})
             render json: {
                 user: UserSerializer.new(user), 
                 token: wristband_token
@@ -22,13 +22,7 @@ class UsersController < ApplicationController
     def create 
         user = User.create(user_params)
         if user.valid?
-            Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-            customer = Stripe::Customer.create({
-                email: params[:email],
-                name: "#{params[:last_name]}, #{params[:first_name]}"
-            })
-            user.update(customer_id: customer.id)
-            wristband_token = encode_token({user_id: user.id})
+            wristband_token = encode_token({user_id: user.id, role: user.class.name})
             render json: {
                 user: UserSerializer.new(user), 
                 token: wristband_token
@@ -40,12 +34,23 @@ class UsersController < ApplicationController
 
     def keep_logged_in
         # @user exists here because of the before_action
-        wristband_token = encode_token({user_id: @user.id})
-        
-        render json: {
+        # @user can either be an instance of general user or animal shelter
+        # avoiding repeated code on animal shelter controller this way
+        if isShelter?
+            wristband_token = encode_token({user_id: @user.id, role: @user.class.name})
+            render json: {
+                user: AnimalShelterSerializer.new(@user), 
+                token: wristband_token,
+                role: @user.class.name
+            }
+        else
+            wristband_token = encode_token({user_id: @user.id, role: @user.class.name})
+            render json: {
             user: UserSerializer.new(@user), 
-            token: wristband_token
+            token: wristband_token,
+            role: @user.class.name
         }
+        end
     end
 
     private
