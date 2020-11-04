@@ -10,7 +10,7 @@ class AnimalSheltersController < ApplicationController
     def login
         animal_shelter = AnimalShelter.find_by(email: params[:email])
         if animal_shelter && animal_shelter.authenticate(params[:password])
-            wristband_token = encode_token({animal_shelter_id: animal_shelter.id})
+            wristband_token = encode_token({animal_shelter_id: animal_shelter.id, role: animal_shelter.class.name})
             render json: {
                 animal_shelter: AnimalShelterSerializer.new(animal_shelter), 
                 token: wristband_token

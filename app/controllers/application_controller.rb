@@ -32,7 +32,10 @@ class ApplicationController < ActionController::API
     end
 
     def logged_in_user
-        if decoded_token
+        if decoded_token && isShelter?
+            animal_shelter_id = decoded_token[0]['animal_shelter_id']
+            @user = AnimalShelter.find_by(id: animal_shelter_id)
+        else decoded_token
             user_id = decoded_token[0]['user_id']
             @user = User.find_by(id: user_id)
         end
@@ -45,8 +48,6 @@ class ApplicationController < ActionController::API
     def check_user
         if decoded_token
             class_name = decoded_token[0]['role']
-            byebug
-            @user = User.find_by(id: user_id)
         end
     end
 
