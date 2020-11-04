@@ -1,3 +1,3 @@
 class AnimalShelterSerializer < ActiveModel::Serializer
-  attributes :first_name, :last_name, :name, :email, :address, :city, :state
+  attributes :id, :first_name, :last_name, :name, :email, :full_address, :donations_received
 end

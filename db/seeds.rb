@@ -20,7 +20,7 @@ User.reset_pk_sequence
         address: Faker::Address.street_address,
         city: Faker::Address.city,
         state: Faker::Address.state,
-        password_digest: 'abc123'
+        password: 'abc123'
     )
 end
 
