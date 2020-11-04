@@ -35,7 +35,6 @@ class UsersController < ApplicationController
     def keep_logged_in
         # @user exists here because of the before_action
         wristband_token = encode_token({user_id: @user.id, role: user.class.name})
-        
         render json: {
             user: UserSerializer.new(@user), 
             token: wristband_token

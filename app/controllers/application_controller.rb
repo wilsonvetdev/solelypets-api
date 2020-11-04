@@ -50,6 +50,10 @@ class ApplicationController < ActionController::API
         end
     end
 
+    def isShelter?
+        check_user === 'AnimalShelter'
+    end
+
     def authorized
         render json: { error: 'Please log in' }, status: :unauthorized unless logged_in?
     end

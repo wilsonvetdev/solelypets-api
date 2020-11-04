@@ -10,7 +10,11 @@ class AnimalSheltersController < ApplicationController
     def login
         animal_shelter = AnimalShelter.find_by(email: params[:email])
         if animal_shelter && animal_shelter.authenticate(params[:password])
-            render json: encode_token({animal_shelter_id: animal_shelter.id})
+            wristband_token = encode_token({animal_shelter_id: animal_shelter.id})
+            render json: {
+                animal_shelter: AnimalShelterSerializer.new(animal_shelter), 
+                token: wristband_token
+            }
         else
             render json: {error: 'Incorrect email or password! Try again.'}, status: 422
         end
