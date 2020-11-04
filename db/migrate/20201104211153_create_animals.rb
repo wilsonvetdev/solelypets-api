@@ -4,7 +4,7 @@ class CreateAnimals < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :species
       t.text :description
-      t.belongs_to :AnimalShelter, null: false, foreign_key: true
+      t.belongs_to :animal_shelter, null: false, foreign_key: true
 
       t.timestamps
     end
