@@ -1,6 +1,6 @@
 class AnimalShelter < ApplicationRecord
     has_many :comments 
-    has_many :donations
+    has_many :animals
 
     has_secure_password
 
