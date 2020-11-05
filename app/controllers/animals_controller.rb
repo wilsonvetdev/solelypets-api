@@ -13,6 +13,12 @@ class AnimalsController < ApplicationController
         render json: animal
     end
 
+    def update
+        animal = @user.animals.find(params[:id])
+        animal.update(animal_params)
+        render json: animal
+    end
+
     private
     def animal_params
         params.permit(:name, :species, :description)
