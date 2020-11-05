@@ -1,6 +1,6 @@
 class AnimalShelter < ApplicationRecord
     has_many :comments 
-    has_many :donations
+    has_many :animals
 
     has_secure_password
 
@@ -14,8 +14,7 @@ class AnimalShelter < ApplicationRecord
     end
 
     def donations_received
-        sessions = find_stripe_sessions
-        sessions.pluck(:amount_total).sum / 100
+        find_stripe_sessions.pluck(:amount_total).sum / 100
     end
     
 end

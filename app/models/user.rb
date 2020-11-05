@@ -19,14 +19,12 @@ class User < ApplicationRecord
     end
 
     def total_donations_amount
-        sessions = find_stripe_sessions
-        array_of_payments = sessions.pluck(:amount_total)
+        array_of_payments = find_stripe_sessions.pluck(:amount_total)
         array_of_payments.inject(0){ |sum, payment| sum + payment} / 100
     end
 
     def donated_to
-        sessions = find_stripe_sessions
-        array_of_unique_shelter_ids = sessions.filter { |session| session.client_reference_id }.pluck(:client_reference_id).uniq
+        array_of_unique_shelter_ids = find_stripe_sessions.filter { |session| session.client_reference_id }.pluck(:client_reference_id).uniq
         array_of_unique_shelter_ids.map { |id| AnimalShelter.find_by(id: id.to_i).name }
     end
 
