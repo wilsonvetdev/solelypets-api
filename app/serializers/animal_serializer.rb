@@ -1,4 +1,4 @@
 class AnimalSerializer < ActiveModel::Serializer
-  attributes :id, :name, :species, :description
-  has_one :AnimalShelter
+  attributes :id, :capitalized_name, :capitalized_species, :description
+  has_one :animal_shelter
 end

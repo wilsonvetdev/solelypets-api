@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   post '/shelter_login', to: 'animal_shelters#login'
   post '/shelter_register', to: 'animal_shelters#create'
 
+  post '/animals', to: 'animals#create'
+  delete '/animals/:id', to: 'animals#destroy'
+
   post '/create-checkout-session', to: 'charges#create'
 
 end
