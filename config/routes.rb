@@ -15,4 +15,6 @@ Rails.application.routes.draw do
 
   post '/create-checkout-session', to: 'charges#create'
 
+  post '/items_upload', to: 'items#create'
+
 end

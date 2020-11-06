@@ -9,6 +9,7 @@ gem 'faker'
 gem 'activerecord_reset_pk_sequence'
 gem 'stripe'
 gem 'dotenv'
+gem 'cloudinary'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
