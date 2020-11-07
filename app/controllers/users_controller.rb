@@ -1,7 +1,3 @@
-require 'stripe'
-require 'dotenv'
-Dotenv.load  
-
 class UsersController < ApplicationController
 
     before_action :authorized, only: [:keep_logged_in]

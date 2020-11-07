@@ -6,12 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Item.destroy_all
+Item.reset_pk_sequence
+Animal.destroy_all
+Animal.reset_pk_sequence
 AnimalShelter.destroy_all
 AnimalShelter.reset_pk_sequence
 User.destroy_all
 User.reset_pk_sequence
 
-6.times do |i|
+5.times do |i|
     AnimalShelter.create!(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
