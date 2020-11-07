@@ -1,7 +1,8 @@
 class AnimalShelter < ApplicationRecord
     has_many :comments 
     has_many :animals
-
+    has_many :items
+    after_create :attach_default_image
     has_secure_password
 
     def full_address
@@ -15,6 +16,12 @@ class AnimalShelter < ApplicationRecord
 
     def donations_received
         find_stripe_sessions.pluck(:amount_total).sum / 100
+    end
+
+    private
+
+    def attach_default_image
+        self.items.create(image: 'https://res.cloudinary.com/dcupfetpr/image/upload/v1604622475/ewxx8ssnhr5aussakdar.jpg')
     end
     
 end
