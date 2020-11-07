@@ -88,8 +88,10 @@ ActiveRecord::Schema.define(version: 2020_11_06_005927) do
     t.string "video"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "animal_id", null: false
+    t.bigint "animal_id"
+    t.bigint "animal_shelter_id"
     t.index ["animal_id"], name: "index_items_on_animal_id"
+    t.index ["animal_shelter_id"], name: "index_items_on_animal_shelter_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,5 +110,6 @@ ActiveRecord::Schema.define(version: 2020_11_06_005927) do
   add_foreign_key "comments", "users"
   add_foreign_key "donations", "animal_shelters"
   add_foreign_key "donations", "users"
+  add_foreign_key "items", "animal_shelters"
   add_foreign_key "items", "animals"
 end

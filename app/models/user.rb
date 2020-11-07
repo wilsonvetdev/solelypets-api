@@ -4,7 +4,6 @@ Dotenv.load
 
 class User < ApplicationRecord
     has_many :comments 
-    has_many :donations
     after_create :save_to_stripe
     has_secure_password
 

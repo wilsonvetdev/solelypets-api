@@ -1,7 +1,3 @@
-require 'stripe'
-require 'dotenv'
-Dotenv.load  
-
 class ChargesController < ApplicationController
 
     before_action :authorized, only: [:create]
