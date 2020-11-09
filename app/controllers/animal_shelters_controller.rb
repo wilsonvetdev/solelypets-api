@@ -13,7 +13,8 @@ class AnimalSheltersController < ApplicationController
             wristband_token = encode_token({animal_shelter_id: animal_shelter.id, role: animal_shelter.class.name})
             render json: {
                 user: AnimalShelterSerializer.new(animal_shelter), 
-                token: wristband_token
+                token: wristband_token,
+                role: 'AnimalShelter'
             }
         else
             render json: {error: 'Incorrect email or password! Try again.'}, status: 422
@@ -27,7 +28,8 @@ class AnimalSheltersController < ApplicationController
             wristband_token = encode_token({animal_shelter_id: animal_shelter.id, role: animal_shelter.class.name})
             render json: {
                 user: AnimalShelterSerializer.new(animal_shelter), 
-                token: wristband_token
+                token: wristband_token,
+                role: 'AnimalShelter'
             }
         else
             render json: {error: 'invalid input'}, status: 422
