@@ -9,7 +9,10 @@ class ItemsController < ApplicationController
         else
             item = Item.create(image: image["url"], animal_shelter_id: @user.id)
         end
-        render json: item
+        render json: {
+            item: item,
+            shelter_id: @user.id
+        }
     end
 
 end
