@@ -56,32 +56,3 @@ class UsersController < ApplicationController
     end
 
 end
-
-# Customer Object returned by Stripe API 
-# <Stripe::Customer:0x3fea1f0cba18 id=cus_IJhHj5C1zwhA0r> JSON: {
-#     "id": "cus_IJhHj5C1zwhA0r",
-#     "object": "customer",
-#     "address": null,
-#     "balance": 0,
-#     "created": 1604326762,
-#     "currency": null,
-#     "default_source": null,
-#     "delinquent": false,
-#     "description": "My First Test Customer (created for API docs)",
-#     "discount": null,
-#     "email": "sponge@email.com",
-#     "invoice_prefix": "C5FB64B0",
-#     "invoice_settings": {"custom_fields":null,"default_payment_method":null,"footer":null},
-#     "livemode": false,
-#     "metadata": {},
-#     "name": "squarepants, spongebob",
-#     "next_invoice_sequence": 1,
-#     "phone": null,
-#     "preferred_locales": [
-
-#     ],
-#     "shipping": null,
-#     "tax_exempt": "none"
-#   }
-#   (byebug) customer.id
-#   "cus_IJhHj5C1zwhA0r"
