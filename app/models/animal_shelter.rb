@@ -18,6 +18,10 @@ class AnimalShelter < ApplicationRecord
         find_stripe_sessions.pluck(:amount_total).sum / 100
     end
 
+    def donations_count
+        find_stripe_sessions.count
+    end
+
     private
 
     def attach_default_image
