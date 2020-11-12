@@ -1,6 +1,6 @@
 class AnimalSheltersController < ApplicationController
 
-    before_action :authorized, only: [:keep_logged_in]
+    before_action :authorized, only: [:update]
 
     def index 
         animal_shelters = AnimalShelter.all 
@@ -34,6 +34,17 @@ class AnimalSheltersController < ApplicationController
         else
             render json: {error: 'invalid input'}, status: 422
         end
+    end
+
+    def update
+        animal_shelter = AnimalShelter.find(@user.id)
+        animal_shelter.update(animal_shelter_params)
+        wristband_token = encode_token({animal_shelter_id: animal_shelter.id, role: animal_shelter.class.name})
+        render json: {
+            user: AnimalShelterSerializer.new(animal_shelter), 
+            token: wristband_token,
+            role: 'AnimalShelter'
+        }
     end
 
     private
