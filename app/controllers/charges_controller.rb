@@ -23,8 +23,8 @@ class ChargesController < ApplicationController
             #
             # Later on in the guide, you'll create a real success page, but no need to
             # do it yet.
-            success_url: 'http://localhost:3001/animal_shelters',
-            cancel_url: 'http://localhost:3001/animal_shelters',
+            success_url: 'http://localhost:3001/user_home',
+            cancel_url: "http://localhost:3001/animal_shelters/#{params[:animal_shelter_id]}",
         })
         render json: { id: session.id }
     end

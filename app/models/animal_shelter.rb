@@ -1,7 +1,7 @@
 class AnimalShelter < ApplicationRecord
     has_many :comments 
     has_many :animals
-    has_many :items
+    has_many :items, dependent: :destroy
     after_create :attach_default_image
     has_secure_password
 
