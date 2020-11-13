@@ -1,7 +1,7 @@
 class AnimalShelter < ApplicationRecord
     has_many :comments 
     has_many :animals
-    has_many :items
+    has_many :items, dependent: :destroy
     after_create :attach_default_image
     has_secure_password
 
@@ -16,6 +16,10 @@ class AnimalShelter < ApplicationRecord
 
     def donations_received
         find_stripe_sessions.pluck(:amount_total).sum / 100
+    end
+
+    def donations_count
+        find_stripe_sessions.count
     end
 
     private

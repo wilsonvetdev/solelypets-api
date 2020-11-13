@@ -4,10 +4,6 @@ class ChargesController < ApplicationController
 
     def create
         Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-        #create association between user and donation - 
-        #-if i create the association here, 
-        #-it seems a little too early because what if the user cancels the session?
-        #feature to have animals being shown on the page - crud for animal shelter
         session = Stripe::Checkout::Session.create({
             customer: @user.customer_id,
             client_reference_id: params[:animal_shelter_id],
@@ -18,7 +14,7 @@ class ChargesController < ApplicationController
                     product_data: {
                     name: 'Donation to animal shelter',
                 },
-                unit_amount: 500,
+                unit_amount: params[:amount].to_i * 100,
                 },
                 quantity: 1,
             }],
@@ -27,8 +23,8 @@ class ChargesController < ApplicationController
             #
             # Later on in the guide, you'll create a real success page, but no need to
             # do it yet.
-            success_url: 'http://localhost:3001/animal_shelters',
-            cancel_url: 'http://localhost:3001/animal_shelters',
+            success_url: 'http://localhost:3001/user_home',
+            cancel_url: "http://localhost:3001/animal_shelters/#{params[:animal_shelter_id]}",
         })
         render json: { id: session.id }
     end

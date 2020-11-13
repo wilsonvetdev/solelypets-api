@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/keep_logged_in', to: 'users#keep_logged_in'
   
   get '/animal_shelters', to: 'animal_shelters#index'
+  patch '/animal_shelters/update', to: 'animal_shelters#update'
   post '/shelter_login', to: 'animal_shelters#login'
   post '/shelter_register', to: 'animal_shelters#create'
 
