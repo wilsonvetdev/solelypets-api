@@ -41,7 +41,7 @@ Database schema will need to be updated with more tables to add more features. F
 ### Landing Page
 ![landing page](https://github.com/wilsonvetdev/solelypets-frontend/blob/main/landing.png)
 
-### Loging Page
+### Login Page
 ![loging page](https://github.com/wilsonvetdev/solelypets-frontend/blob/main/login.png)
 
 ### User Home
