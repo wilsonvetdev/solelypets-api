@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.1'
+ruby '2.6.6'
 
 gem 'jwt'
 gem 'active_model_serializers'
 gem 'faker'
 gem 'activerecord_reset_pk_sequence'
 gem 'stripe'
-gem 'dotenv'
+gem 'dotenv-rails'
 gem 'cloudinary'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
